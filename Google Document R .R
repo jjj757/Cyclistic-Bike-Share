@@ -131,7 +131,7 @@ table(all_12_months_v2$month)
 table(all_12_months_v2$year)
 
 
-#Getting rid of docked biked_bikes and ride times less than zero
+#Getting rid of HQ bikes and ride times less than zero
 
 all_12_months_v2 <- all_12_months_v2[!(all_12_months_v2$rideable_type == "HQ QR" | all_12_months_v2$ride_length<0),]
 
