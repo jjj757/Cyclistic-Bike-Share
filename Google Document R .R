@@ -92,9 +92,15 @@ c<-all_12_months_v2%>%
   filter(all_12_months_v2$start_station_name == ""|all_12_months_v2$start_station_id == ""|all_12_months_v2$end_station_name == ""|all_12_months_v2$end_station_id == "")
 #filtering for rows with no ""
 c<-all_12_months_v2%>%
-  filter(all_12_months_v2$start_station_name != ""|all_12_months_v2$start_station_id != ""|all_12_months_v2$end_station_name != ""|all_12_months_v2$end_station_id != "")
+  filter(all_12_months_v2$start_station_name != "") 
+c1<- c%>%
+  filter(c$start_station_id != "")
+c2<- c1%>%
+  filter(c1$end_station_name != "")
+c3<- c2%>%
+  filter(c2$end_station_id != "")
 
-all_12_months_v2<-c
+all_12_months_v2<-c3
 #rechecking
 str(all_12_months_v2)
 #creating date, day of week, month, day, and year of data
@@ -131,7 +137,7 @@ table(all_12_months_v2$month)
 table(all_12_months_v2$year)
 
 
-#Getting rid of docked biked_bikes and ride times less than zero
+#Getting rid of HQ bikes and ride times less than zero
 
 all_12_months_v2 <- all_12_months_v2[!(all_12_months_v2$rideable_type == "HQ QR" | all_12_months_v2$ride_length<0),]
 
@@ -185,8 +191,10 @@ e<-all_12_months_v2 %>%
             ,average_duration = mean(ride_length)) %>% 		# calculates the average duration
   arrange(member_casual, weekday)	
 
-  
+
 
 #export for visualization on Tableau
 counts <- all_12_months_v2
-write.csv(counts, file = '~/Desktop/tripdata.csv')
+write.csv(counts, file = '~/Desktop/tripdata2.csv')
+
+
